@@ -1,0 +1,33 @@
+body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: #00B7FF;
+}
+
+.table table{
+  width: 100%;
+}
+
+.table table th{
+  text-align:  center;
+}
+
+.table .options{
+  text-align: right;
+}
+
+[name="saveMateria"]{
+  display: flex;
+  justify-content: center;
+  margin-bottom: 2em;
+}
+
+[name="saveMateria"] > input {
+  padding: 1em;
+  border-radius: 1em;
+  border: 1px solid rgba(20, 20, 20, 0.418);
+  margin: 0.2em;
+}
