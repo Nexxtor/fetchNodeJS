@@ -3,7 +3,6 @@ let app = {
         this.addEvents();
     },
     addEvents: function () {
-        let verMaterias = document.getElementById('allMaterias');
         let loadContent = function () {
             fetch("/materia")
                 .then(res => res.json())
@@ -41,7 +40,7 @@ let app = {
         }
         let form = document.forms.saveMateria;
 
-        form.addEventListener('submit', function (evnt) {
+        form.addEventListener('submit', function (event) {
             event.preventDefault();
             fetch(form.action, {
                     method: 'POST',
@@ -56,4 +55,4 @@ let app = {
         loadContent();
     }
 };
-window.onload = () => app.addEvents();
+window.onload = () => app.init();

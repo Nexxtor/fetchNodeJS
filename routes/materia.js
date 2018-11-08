@@ -5,7 +5,7 @@ var express = require('express'),
 router.get('/', function (req, res) {
     materiaModel.find({}, function (err, materias) {
         if (err) {
-            res.statusCode(500);
+            res.status(500);
             res.json({
                 status: 500,
                 err
@@ -21,7 +21,7 @@ router.get('/:name', function (req, res) {
     if (req.params.name) {
         materiaModel.findOne({
             nombre: req.params.name
-        }, function (err, mataria) {
+        }, function (err, materia) {
             if (err) {
                 res.status(500);
                 res.json({
@@ -29,7 +29,7 @@ router.get('/:name', function (req, res) {
                     err
                 });
             } else {
-                res.json(mataria);
+                res.json(materia);
             }
         });
     } else {
