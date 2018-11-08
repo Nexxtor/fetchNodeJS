@@ -13,10 +13,18 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var materiaRouter = require('./routes/materia');
 
+var user = process.env.USERDB || "";
+var password = process.env.PASSDB  || "";
+
+var crendentials = user+":"+password+"@";
+
+var server = process.env.SERVER || "localhost";
+var db = process.env.DATABASE || "taller";
 
 mongoose.Promise = global.Promise;
-
-mongoose.connect('mongodb://localhost/taller', {
+var string = `mongodb://${crendentials}${server}/${db}`
+console.log(string)
+mongoose.connect(string, {
     useNewUrlParser: true
   })
   .then(() => console.log('Conecction Success'))
