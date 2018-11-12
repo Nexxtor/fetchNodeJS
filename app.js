@@ -6,24 +6,23 @@ var logger = require('morgan');
 var mongoose = require('mongoose');
 
 //Modelos
-var Materia  = require('./models/Materia');
+var materia = require('./models/Materia');
 
 // Routuers
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var materiaRouter = require('./routes/materia');
 
+// Connect to mongo 
+// Move to other file
 var user = process.env.USERDB || "";
-var password = process.env.PASSDB  || "";
-
-var crendentials = user+":"+password+"@";
-
+var password = process.env.PASSDB || "";
 var server = process.env.SERVER || "localhost";
 var db = process.env.DATABASE || "taller";
+var string = `mongodb://${user}:${password}@${server}/${db}`;
 
 mongoose.Promise = global.Promise;
-var string = `mongodb://${crendentials}${server}/${db}`
-console.log(string)
+
 mongoose.connect(string, {
     useNewUrlParser: true
   })
