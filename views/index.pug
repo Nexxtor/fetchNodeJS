@@ -1,19 +1,34 @@
 extends layout
 
 block content
-  
-  form(action="/materia" method="post" name="saveMateria")
-    input#name(type="text", name="name", placeholder="Nombre")
-    input#uv(type="number", name="uv" placeholder="uv")
-    input#descripcion(type="text" name="descripcion" placeholder="Descripcion")
-    input(type="submit", value="Guardar")
-  .table
-    table 
-      thead
-        th Nombre
-        th Uv
-        th Opciones
-      tbody.materias
+  .container
+    header
+     h1 Administrador de Materias  
+    form#new(action="/materia" method="post" name="saveMateria")
+      .group
+        input#name(type="text", name="name" required)
+        span.highlight
+        span.bar
+        label(for="name") Materia
+      .group
+        input#uv(type="number", name="uv" required min=3 max=5)
+        span.highlight
+        span.bar
+        label(for="uv") Unidades Valorativas
+      .group
+        input#descripcion(type="text" name="descripcion" required)
+        span.highlight
+        span.bar
+        label(for="uv") Descripción
+      button.btn(type="submit")
+        span Guardar
+    .table
+      table 
+        thead
+          th Nombre
+          th Uv
+          th Opciones
+        tbody.materias
   script(src="/javascripts/main.js")
   
 
