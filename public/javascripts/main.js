@@ -11,17 +11,32 @@ let app = {
 
                     materias.innerHTML = data.reduce((cadena, element) => {
                         return cadena +
-                            ` <tr>
+                          ` <tr>
                                 <td class="name">${element.nombre}</td>
                                 <td class="uv">${element.uv}</td>
                                 <td class="options"> 
-                                    <a class="more" href=""> More</a>
-                                    <a class="edit" href=""> Edit </a>
-                                    <a class="delete" href=""> Delete </a>
+                                    <a data-id="${element._id}" class="more" href=""> More</a>
+                                    <a data-id="${element._id}" class="edit" href=""> Edit </a>
+                                    <a data-id="${element._id}" class="delete" href=""> Delete </a>
                                 </td>
                             </tr>`
                     }, "");
 
+                    document.querySelectorAll(".delete").forEach(element => {
+                        element.addEventListener('click', function(event){
+                            event.preventDefault();
+                            let id = element.getAttribute("data-id");
+                            fetch('/materia/'+id, { method: 'DELETE'})
+                                .then(res => res.json())
+                                .then(data => {
+                                    if (data.success) {
+                                       materias.removeChild( element.parentElement.parentElement);
+                                    } 
+                                }).catch(err => {
+                                    console.log(err);
+                                });
+                        });
+                    });
                     document.querySelectorAll(".more").forEach(element => {
                         element.addEventListener('click', function (evnt) {
                             evnt.preventDefault();
@@ -36,6 +51,8 @@ let app = {
                                 });
                         });
                     });
+
+                    
                 });
         }
         let form = document.forms.saveMateria;

@@ -24,7 +24,9 @@ var string = `mongodb://${user}:${password}@${server}/${db}`;
 mongoose.Promise = global.Promise;
 
 mongoose.connect(string, {
-    useNewUrlParser: true
+    useNewUrlParser: true,
+    useFindAndModify: false,
+    useCreateIndex: true
   })
   .then(() => console.log('Conecction Success'))
   .catch(() => console.error('No Connected'));
