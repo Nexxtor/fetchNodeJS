@@ -1,7 +1,11 @@
 var mongoose = require('mongoose');
 
 let Materia = new mongoose.Schema({
-    nombre: String,
+    nombre: {
+        type: String,
+        required: true,
+        unique: true
+    },
     uv: Number,
     descripcion: String
 });
