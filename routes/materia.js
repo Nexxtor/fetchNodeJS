@@ -19,10 +19,10 @@ router.get('/', function (req, res) {
     });
 });
 
-router.get('/:name', function (req, res) {
-    if (req.params.name) {
+router.get('/:id', function (req, res) {
+    if (req.params.id) {
         materiaModel.findOne({
-            nombre: req.params.name
+            _id: req.params.id
         }, function (err, materia) {
             if (err) {
                 res.status(500);
@@ -92,7 +92,7 @@ router.delete('/:id', function (req, res) {
     }
 });
 
-router.put("/:id", function (req, res) {
+/*router.put("/:id", function (req, res) {
     if (req.params.id) {
         materiaModel.findByIdAndUpdate(req.params.id, {
                 nombre: req.body.name,
@@ -109,5 +109,31 @@ router.put("/:id", function (req, res) {
             success: false
         });
     }
+});*/
+
+router.put('/:id', function(req,res){
+    if (req.params.id) {
+        materiaModel.findByIdAndUpdate(req.params.id,{
+          nombre: req.body.name,
+          uv: req.body.uv,
+          descripcion: req.body.descripcion
+        },function(err,updated){
+            if (err){
+                res.json({
+                    status: 500,
+                    success: false,
+                    errs
+                });
+            } else{
+                res.json({
+                    status: 200,
+                    success: true,
+                    updated
+                })
+            }
+        });
+    }
 });
+
+
 module.exports = router;
